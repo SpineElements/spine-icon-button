@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>spine-icon-button test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../spine-icon-button.html">
+</head>
+<body>
+<test-fixture id="main">
+    <template>
+        <spine-icon-button></spine-icon-button>
+    </template>
+</test-fixture>
+
+<script>
+    suite('spine-icon-button', function () {
+        test('should instantiate the element', () => {
+            const element = fixture('main');
+            expect(element.constructor.is).to.eql('spine-icon-button');
+        });
+
+        test('should has `button` role', () => {
+            const element = fixture('main');
+            expect(element.getAttribute('role')).to.eql('button');
+        });
+
+        test('should not be focusable if `disabled` property is true', () => {
+            const element = fixture('main');
+
+            element.disabled = false;
+            expect(element.tabIndex).to.eql(0);
+            element.disabled = true;
+            expect(element.tabIndex).to.eql(-1);
+        });
+    });
+</script>
+</body>
+</html>
