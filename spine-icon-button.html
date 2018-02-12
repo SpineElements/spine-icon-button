@@ -1,0 +1,92 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-behaviors/paper-inky-focus-behavior.html">
+
+<!--
+ An element which represents a button with a center-aligned icon.
+ Differs from the `paper-icon-button` by the ability to contain arbitrary content beside the icon itself.
+
+ ### Styling
+
+ The following mixins and properties are available for styling:
+
+ Custom property | Description | Default
+ ----------------|-------------|----------
+ `--spine-icon-button` | Mixin applied to the button | `{}`
+ `--spine-icon-button-icon` | Mixin applied to the icon | `{}`
+ `--spine-icon-ink-color` | Focus ripple color | `rgba(0, 0, 0, .26)`
+-->
+<dom-module id="spine-icon-button">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+                padding: 8px;
+                outline: none;
+                z-index: 0;
+                box-sizing: border-box;
+
+                @apply --spine-icon-button;
+            }
+
+            :host #ink {
+                color: var(--spine-icon-ink-color, rgba(0, 0, 0, .26));
+            }
+
+            iron-icon {
+                @apply --spine-icon-button-icon;
+            }
+        </style>
+
+        <iron-icon icon="[[icon]]"></iron-icon>
+        <slot></slot>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class SpineIconButton extends Polymer.mixinBehaviors(Polymer.PaperInkyFocusBehavior,
+            Polymer.Element) {
+
+            static get is() {
+                return 'spine-icon-button';
+            }
+
+            static get properties() {
+                return {
+                    /**
+                     * The icon name. Must be compatible with `iron-icon` format.
+                     */
+                    icon: {
+                        type: String
+                    },
+
+                    disabled: {
+                        type: Boolean,
+                        value: false,
+                        observer: '_disabledStateObserver'
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+                this._ensureAttribute('tabIndex', 0);
+                this._ensureAttribute('role', 'button');
+            }
+
+            _disabledStateObserver(value) {
+                if (!value) {
+                    this.setAttribute('tabIndex', 0);
+                }
+            }
+        }
+
+        window.customElements.define(SpineIconButton.is, SpineIconButton);
+    </script>
+</dom-module>
