@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>spine-icon-button demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-icons/iron-icons.html">
+    <link rel="import" href="../../iron-icons/editor-icons.html">
+    <link rel="import" href="../spine-icon-button.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+        </style>
+    </custom-style>
+</head>
+<body>
+<div class="vertical-section-container centered">
+    <h3>Buttons use iron-icons format</h3>
+    <demo-snippet class="centered-demo">
+        <template>
+            <spine-icon-button icon="icons:change-history"></spine-icon-button>
+            <spine-icon-button icon="icons:android"></spine-icon-button>
+            <spine-icon-button icon="icons:send"></spine-icon-button>
+        </template>
+    </demo-snippet>
+
+    <h3>Buttons can be styled using custom properties</h3>
+    <demo-snippet class="centered-demo">
+        <template>
+            <spine-icon-button class="up" icon="icons:thumb-up"></spine-icon-button>
+            <spine-icon-button class="down" icon="icons:thumb-down"></spine-icon-button>
+            <custom-style>
+                <style is="custom-style">
+                    spine-icon-button.up {
+                        color: darkred;
+                        --spine-icon-ink-color: rgba(255, 0, 0, .54);
+                    }
+                    spine-icon-button.down {
+                        color: white;
+                        background: black;
+                        border-radius: 50%;
+                        --spine-icon-ink-color: rgba(255, 255, 255, 1);
+                    }
+                </style>
+            </custom-style>
+        </template>
+    </demo-snippet>
+
+    <h3>Buttons can contain arbitrary content beside the main icon</h3>
+    <demo-snippet class="centered-demo">
+        <template>
+            <spine-icon-button class="content" icon="editor:format-color-fill">
+                <iron-icon icon="icons:arrow-drop-down" id="suffix"></iron-icon>
+                <span>text</span>
+            </spine-icon-button>
+            <custom-style>
+                <style is="custom-style">
+                    spine-icon-button.content {
+                        width: 60px;
+                        height: 60px;
+                        text-align: center;
+                    }
+
+                    spine-icon-button.content > span {
+                        text-align: center;
+                        padding: 4px;
+                    }
+
+                    #suffix {
+                        position: absolute;
+                        right: -2px;
+                        top: 18px;
+                    }
+                </style>
+            </custom-style>
+        </template>
+    </demo-snippet>
+</div>
+</body>
+</html>
